@@ -1,0 +1,1 @@
+INSERT INTO helo_users (username, password, profile_pic) RETURNING *;
