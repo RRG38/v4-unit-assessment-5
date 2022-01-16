@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 import './Dash.css';
 
 class Dash extends Component {
@@ -64,10 +65,12 @@ class Dash extends Component {
     let {loading, search, posts, myPosts, oldestFirst} = this.state
 
     let mappedPosts = posts.map(post => {
+      const id = post.post_id;
+      const intID = +id;
       return <div className='content-box dash-post-box' key={post.post_id}>
-          <h3>{post.title}</h3>
+          <Link to={`post/${intID}`}><h3>{post.title}</h3></Link>
           {
-            post.author_username === this.props.username 
+            post.author_username === this.props.username
             ?
             <button onClick={_ => this.deletePost(post.post_id)}>delete your post</button>
             :
@@ -78,7 +81,7 @@ class Dash extends Component {
           }
         </div>
     })
-    
+
     return (
       <div className='dash'>
         <div className='content-box dash-filter'>
